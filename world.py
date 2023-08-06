@@ -7,4 +7,7 @@ num = 1
 
 # print('树莓红色'.encode('utf8').decode('gbk'))
 
-print('window.NEW_DETAIL_ENV'.encode('utf8').decode('gbk'))
+# print('window.NEW_DETAIL_ENV'.encode('utf8').decode('gbk'))
+
+a = range(1,50+1)
+print(type(a))
