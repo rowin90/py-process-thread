@@ -13,7 +13,6 @@ def do_craw(url_queue: queue.Queue, html_queue: queue.Queue):
         print(threading.currentThread().name, f"craw {url}", "url_queue.size=", url_queue.qsize())
         time.sleep(random.randint(1, 2))
 
-
 def do_parse(html_queue: queue.Queue, fout):
     while True:
         html = html_queue.get()
