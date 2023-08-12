@@ -195,3 +195,7 @@ with concurrent.futures.ThreadPoolExecutor() as pool:
         print(url, future.result())
 
 ```
+# 启动Celery
+```shell
+ celery -A celery_task worker -l info
+```

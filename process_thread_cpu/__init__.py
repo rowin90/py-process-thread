@@ -2,7 +2,8 @@ import math
 import time
 from concurrent.futures import ThreadPoolExecutor, ProcessPoolExecutor
 
-PRIMES = [112272535095293] * 100
+# PRIMES = [112272535095293] * 100
+PRIMES = [4324324234213] * 100
 
 
 def is_prime(n):
