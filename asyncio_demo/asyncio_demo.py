@@ -1,6 +1,6 @@
 '''asyncio事件驱动使用'''
 
-import asyncio_demo
+import asyncio
 import time
 
 now = lambda: time.time()
@@ -21,7 +21,7 @@ start = now()
 # 2. 调用协程函数获得协程对象
 coroutine = buy('电脑')
 # 3. 获取默认的事件循环对象
-loop = asyncio_demo.get_event_loop()
+loop = asyncio.get_event_loop()
 # 4. 根据协程对象创建task对象：注册事件event
 task = loop.create_task(coroutine)
 # task = asyncio.ensure_future(coroutine)
