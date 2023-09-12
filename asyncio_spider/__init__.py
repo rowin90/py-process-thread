@@ -1,4 +1,4 @@
-import asyncio
+import asyncio_demo
 import aiohttp
 import time
 from spider import blog_spider
@@ -12,7 +12,7 @@ async def async_craw(url):
             print(f"craw url: {url}, {len(result)}")
 
 
-loop = asyncio.get_event_loop()
+loop = asyncio_demo.get_event_loop()
 
 tasks = [
     loop.create_task(async_craw(url))
@@ -20,6 +20,7 @@ tasks = [
 
 
 start = time.time()
-loop.run_until_complete(asyncio.wait(tasks))
+#  启动事件循环
+loop.run_until_complete(asyncio_demo.wait(tasks))
 end = time.time()
 print("use time seconds: ", end - start)
