@@ -14,13 +14,11 @@ def event_handle(future):
 
 # 1. 定义协程函数：购买事件
 async def buy(item):
-    await asyncio.sleep(1)
+    await asyncio.sleep(1) # 即使每次都 sleep 了 1s,整个执行结果，循环了3个task，结果还是执行了1s多，协程的优势
     return item
 
 start = now()
 
-# 2. 调用协程函数获得协程对象
-coroutine = buy('电脑')
 # 3. 获取默认的事件循环对象
 loop = asyncio.get_event_loop()
 # 4. 根据协程对象创建task对象：注册事件event
