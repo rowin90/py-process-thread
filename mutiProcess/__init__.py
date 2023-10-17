@@ -21,9 +21,9 @@ print('这是 shared_resource的', mp.current_process().name, id(shared_resource
 def worker(index):
     # 在进程锁的上下文内访问共享资源
     with lock:
-    # global a
-    # a += 1
-    # print('a', mp.current_process().name, id(a), a)
+        # global a
+        # a += 1
+        # print('a', mp.current_process().name, id(a), a)
         shared_resource.append(index)
         # time.sleep(0.1)
 
