@@ -6,7 +6,7 @@ class Account:
         self.balance = balance
 
 
-def draw(account, amount):
+def drawWithLock(account, amount):
     with lock:
         if (account.balance >= amount):
             print(threading.currentThread().name, '取成功')
@@ -14,6 +14,13 @@ def draw(account, amount):
             print(threading.currentThread().name, '余额', account.balance)
         else:
             print(threading.currentThread().name, '取失败，余额不足')
+def draw(account, amount):
+    if (account.balance >= amount):
+        print(threading.currentThread().name, '取成功')
+        account.balance -= amount
+        print(threading.currentThread().name, '余额', account.balance)
+    else:
+        print(threading.currentThread().name, '取失败，余额不足')
 
 
 if __name__ == '__main__':
