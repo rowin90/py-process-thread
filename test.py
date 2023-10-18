@@ -1,44 +1,24 @@
-import concurrent.futures
-import multiprocessing
+from multiprocessing import Process, Queue
 import multiprocessing as mp
-from multiprocessing import Lock
-import time
-
-# multiprocessing.set_start_method('fork')
-
-# 创建进程锁
-lock = Lock()
-print('lock 哟', id(lock))
-
-# 定义共享资源
-shared_resource = []
-print('这是 shared_resource的', mp.current_process().name, id(shared_resource), shared_resource)
-
-# a = 1
-# print('a', mp.current_process().name, id(a), a)
-
-# 定义需要执行的任务
-def worker(index):
-    # 在进程锁的上下文内访问共享资源
-    with lock:
-    # global a
-    # a += 1
-    # print('a', mp.current_process().name, id(a), a)
-        shared_resource.append(index)
-        # time.sleep(0.1)
-
-        print('shared_resource',mp.current_process().name,id(shared_resource), shared_resource)
 
 
-if __name__ == '__main__':
-    print('开始')
+def worker(q):
+    """子进程"""
+    data = q.get()  # 从队列中获取数据
+    print("Received:", data,mp.current_process().name)
 
-    # 使用 ProcessPoolExecutor 并行执行任务
-    with concurrent.futures.ProcessPoolExecutor(max_workers=4) as executor:
-        futures = [executor.submit(worker, i) for i in range(10)]
 
-    # worker(1)
+if __name__ == "__main__":
+    queue = Queue()  # 创建一个 Queue 对象
 
-    # 打印共享资源
-    print('主进程', mp.current_process().name, id(shared_resource), shared_resource)
-    # print('主进程', mp.current_process().name, id(a), a)
+    p = Process(target=worker, args=(queue,))  # 创建子进程，并将队列作为参数传入
+    p1 = Process(target=worker, args=(queue,))  # 创建子进程，并将队列作为参数传入
+    p.start()  # 启动子进程
+    p1.start()  # 启动子进程
+
+    data = "Hello, World!"
+    data1 = "Hello, World!1111"
+    queue.put(data)  # 将数据放入队列中
+    queue.put(data1)  # 将数据放入队列中
+    # p.join()  # 等待子进程结束
+    p1.join()  # 等待子进程结束
